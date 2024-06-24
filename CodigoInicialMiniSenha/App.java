@@ -96,7 +96,7 @@ public class App {
                 //TelaInicio app = new TelaInicio();
                 //app.criaJanelaNovoJogo();
 
-                TelaEscolha escolha = new TelaEscolha(null, null);
+                TelaEscolha escolha = new TelaEscolha(null, null, null);
                 escolha.criaJanelaEscolhaSenha();
             }
         });

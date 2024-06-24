@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,13 +23,13 @@ public class TelaEscolha {
     private JFrame win;
 
     private PinoColorido [] tentativaUm;
-    private Pino [] tentativaDois;
-    private Pino [] tentativaTres;
-    private Pino [] tentativaQuatro;
-    private Pino [] tentativaCinco;
-    private Pino [] tentativaSeis;
-    private Pino [] tentativaSete;
-    private Pino [] tentativaOito;
+    private PinoColorido [] tentativaDois;
+    private PinoColorido [] tentativaTres;
+    private PinoColorido [] tentativaQuatro;
+    private PinoColorido [] tentativaCinco;
+    private PinoColorido [] tentativaSeis;
+    private PinoColorido [] tentativaSete;
+    private PinoColorido [] tentativaOito;
     
     private PinoPB[] pinos;
 
@@ -71,19 +72,22 @@ public class TelaEscolha {
 
     private int numTentativas;
 
-    public TelaEscolha(JFrame win, PinoColorido[] pinosEscolhaSenha) {
+    private JFrame frame;
+
+    public TelaEscolha(JFrame win, PinoColorido[] pinosEscolhaSenha, PinoColorido[] senha) {
         this.win = win;
         this.tentativaUm = pinosEscolhaSenha;
         this.numPreto = 0;
         this.numBranco = 0;
-        this.senha = new PinoColorido[4];
+        this.senha = senha;
         this.criaSenha = new CriadorSenha(senha);
         this.numTentativas = 0;
     }
 
     public void criaJanelaEscolhaSenha(){
     
-        PinoColorido[] senha = criaSenha.criaSenha();
+        senha = new PinoColorido[4];
+        senha = criaSenha.criaSenha();
         
         //CriadorSenha metodoSenha = new CriadorSenha();
 
@@ -141,7 +145,7 @@ public class TelaEscolha {
 
         // segunda
 
-        tentativaDois = new Pino[4];
+        tentativaDois = new PinoColorido[4];
         tentativaDois[0] = PinoColorido.criaPinoColorido("RED");
         tentativaDois[1] = PinoColorido.criaPinoColorido("RED");
         tentativaDois[2] = PinoColorido.criaPinoColorido("RED");
@@ -166,7 +170,7 @@ public class TelaEscolha {
 
         // terceira
 
-        tentativaTres = new Pino[4];
+        tentativaTres = new PinoColorido[4];
         tentativaTres[0] = PinoColorido.criaPinoColorido("RED");
         tentativaTres[1] = PinoColorido.criaPinoColorido("RED");
         tentativaTres[2] = PinoColorido.criaPinoColorido("RED");
@@ -190,7 +194,7 @@ public class TelaEscolha {
 
         // quarta
 
-        tentativaQuatro = new Pino[4];
+        tentativaQuatro = new PinoColorido[4];
         tentativaQuatro[0] = PinoColorido.criaPinoColorido("RED");
         tentativaQuatro[1] = PinoColorido.criaPinoColorido("RED");
         tentativaQuatro[2] = PinoColorido.criaPinoColorido("RED");
@@ -214,7 +218,7 @@ public class TelaEscolha {
 
         // quinta
 
-        tentativaCinco = new Pino[4];
+        tentativaCinco = new PinoColorido[4];
         tentativaCinco[0] = PinoColorido.criaPinoColorido("RED");
         tentativaCinco[1] = PinoColorido.criaPinoColorido("RED");
         tentativaCinco[2] = PinoColorido.criaPinoColorido("RED");
@@ -238,7 +242,7 @@ public class TelaEscolha {
 
         // sexta
 
-        tentativaSeis = new Pino[4];
+        tentativaSeis = new PinoColorido[4];
         tentativaSeis[0] = PinoColorido.criaPinoColorido("RED");
         tentativaSeis[1] = PinoColorido.criaPinoColorido("RED");
         tentativaSeis[2] = PinoColorido.criaPinoColorido("RED");
@@ -263,7 +267,7 @@ public class TelaEscolha {
 
         // setima
 
-        tentativaSete = new Pino[4];
+        tentativaSete = new PinoColorido[4];
         tentativaSete[0] = PinoColorido.criaPinoColorido("RED");
         tentativaSete[1] = PinoColorido.criaPinoColorido("RED");
         tentativaSete[2] = PinoColorido.criaPinoColorido("RED");
@@ -287,7 +291,7 @@ public class TelaEscolha {
 
         // oitava
 
-        tentativaOito = new Pino[4];
+        tentativaOito = new PinoColorido[4];
         tentativaOito[0] = PinoColorido.criaPinoColorido("RED");
         tentativaOito[1] = PinoColorido.criaPinoColorido("RED");
         tentativaOito[2] = PinoColorido.criaPinoColorido("RED");
@@ -361,9 +365,6 @@ public class TelaEscolha {
 
     public void trataEventoBotaoEnviar(ActionEvent ev) {
         
-        PinoColorido [] senhaTeste = new PinoColorido[4];
-        
-
         numTentativas++;
         switch (numTentativas) {
             case 1:
@@ -371,14 +372,6 @@ public class TelaEscolha {
                 tentativaUm[1].setEnabled(false);
                 tentativaUm[2].setEnabled(false);
                 tentativaUm[3].setEnabled(false);
-
-                //for (int i = 0; i < senha.length; i ++) {
-                //    System.out.println(senha[i].getCor());
-                //}
-
-                for (int i = 0; i < tentativaUm.length; i ++) {
-                    System.out.println(tentativaUm[i].getCor());
-                }
 
                 comparaPinos(tentativaUm, senha);
                 numPinoPretoUm.setText("" + numPreto);
@@ -395,6 +388,10 @@ public class TelaEscolha {
                 tentativaDois[2].setEnabled(false);
                 tentativaDois[3].setEnabled(false);
 
+                comparaPinos(tentativaDois, senha);
+                numPinoPretoDois.setText("" + numPreto);
+                numPinoBrancoDois.setText("" + numBranco);
+
                 tentativaTres[0].setEnabled(true);
                 tentativaTres[1].setEnabled(true);
                 tentativaTres[2].setEnabled(true);
@@ -405,6 +402,10 @@ public class TelaEscolha {
                 tentativaTres[1].setEnabled(false);
                 tentativaTres[2].setEnabled(false);
                 tentativaTres[3].setEnabled(false);
+
+                comparaPinos(tentativaTres, senha);
+                numPinoPretoTres.setText("" + numPreto);
+                numPinoBrancoTres.setText("" + numBranco);
 
                 tentativaQuatro[0].setEnabled(true);
                 tentativaQuatro[1].setEnabled(true);
@@ -417,6 +418,10 @@ public class TelaEscolha {
                 tentativaQuatro[2].setEnabled(false);
                 tentativaQuatro[3].setEnabled(false);
 
+                comparaPinos(tentativaQuatro, senha);
+                numPinoPretoQuatro.setText("" + numPreto);
+                numPinoBrancoQuatro.setText("" + numBranco);
+
                 tentativaCinco[0].setEnabled(true);
                 tentativaCinco[1].setEnabled(true);
                 tentativaCinco[2].setEnabled(true);
@@ -427,6 +432,10 @@ public class TelaEscolha {
                 tentativaCinco[1].setEnabled(false);
                 tentativaCinco[2].setEnabled(false);
                 tentativaCinco[3].setEnabled(false);
+
+                comparaPinos(tentativaCinco, senha);
+                numPinoPretoCinco.setText("" + numPreto);
+                numPinoBrancoCinco.setText("" + numBranco);
 
                 tentativaSeis[0].setEnabled(true);
                 tentativaSeis[1].setEnabled(true);
@@ -439,6 +448,10 @@ public class TelaEscolha {
                 tentativaSeis[2].setEnabled(false);
                 tentativaSeis[3].setEnabled(false);
 
+                comparaPinos(tentativaSeis, senha);
+                numPinoPretoSeis.setText("" + numPreto);
+                numPinoBrancoSeis.setText("" + numBranco);
+
                 tentativaSete[0].setEnabled(true);
                 tentativaSete[1].setEnabled(true);
                 tentativaSete[2].setEnabled(true);
@@ -450,12 +463,27 @@ public class TelaEscolha {
                 tentativaSete[2].setEnabled(false);
                 tentativaSete[3].setEnabled(false);
 
+                comparaPinos(tentativaSete, senha);
+                numPinoPretoSete.setText("" + numPreto);
+                numPinoBrancoSete.setText("" + numBranco);
+
                 tentativaOito[0].setEnabled(true);
                 tentativaOito[1].setEnabled(true);
                 tentativaOito[2].setEnabled(true);
                 tentativaOito[3].setEnabled(true);
                 break;
             case 9:
+                tentativaOito[0].setEnabled(false);
+                tentativaOito[1].setEnabled(false);
+                tentativaOito[2].setEnabled(false);
+                tentativaOito[3].setEnabled(false);
+
+                comparaPinos(tentativaOito, senha);
+                numPinoPretoOito.setText("" + numPreto);
+                numPinoBrancoOito.setText("" + numBranco);
+
+                JOptionPane.showMessageDialog(frame, "Voce perdeu", "Fim de jogo", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
                 // perdeu
                 break;
         }
@@ -504,12 +532,19 @@ public class TelaEscolha {
             boolean[] marcadosSegundo = new boolean[segundo.length];
         
             // Contar pinos pretos (corretos na posição correta)
+            if (primeiro[0].getCor().equals(segundo[0].getCor()) && primeiro[1].getCor().equals(segundo[1].getCor()) && 
+                primeiro[2].getCor().equals(segundo[2].getCor()) && primeiro[3].getCor().equals(segundo[3].getCor())) {
+                    System.out.println("venceu");
+                    JOptionPane.showMessageDialog(frame, "Voce venceu", "Fim de jogo", JOptionPane.INFORMATION_MESSAGE);
+                    System.exit(0);
+                }
             for (int i = 0; i < primeiro.length; i++) {
                 if (primeiro[i].getCor().equals(segundo[i].getCor())) {
                     numPreto++;
                     marcadosPrimeiro[i] = true;
                     marcadosSegundo[i] = true;
-                    System.out.println("teste");
+                    //System.out.println("teste");
+                    System.out.println(numPreto);
                 }
             }
         
@@ -517,14 +552,15 @@ public class TelaEscolha {
             for (int i = 0; i < primeiro.length; i++) {
                 if (!marcadosPrimeiro[i]) {
                     for (int j = 0; j < segundo.length; j++) {
-                        if (!marcadosSegundo[j] && primeiro[i].equals(segundo[j])) {
+                        if (!marcadosSegundo[j] && primeiro[i].getCor().equals(segundo[j].getCor())) {
                             numBranco++;
                             marcadosSegundo[j] = true;
+                            System.out.println("Pinos brancos: " + numBranco);
                             break;
-                        }
                     }
                 }
             }
          
         }
+    }
 }
