@@ -20,7 +20,8 @@ public class TelaEscolha {
     
 
     private JFrame win;
-    private Pino [] tentativaUm;
+
+    private PinoColorido [] tentativaUm;
     private Pino [] tentativaDois;
     private Pino [] tentativaTres;
     private Pino [] tentativaQuatro;
@@ -39,45 +40,45 @@ public class TelaEscolha {
     private int numBranco;
     private int numPreto;
 
-    private int tentativaUmPreto;
-    private int tentativaUmBranco;
+    private JLabel numPinoPretoUm;
+    private JLabel numPinoBrancoUm;
+
+    private JLabel numPinoPretoDois;
+    private JLabel numPinoBrancoDois;
     
-    private int tentativaDoisPreto;
-    private int tentativaDoisBranco;
+    private JLabel numPinoPretoTres;
+    private JLabel numPinoBrancoTres;
 
-    private int tentativaTresPreto;
-    private int tentativaTresBranco;
+    private JLabel numPinoPretoQuatro;
+    private JLabel numPinoBrancoQuatro;
 
-    private int tentativaQuatroPreto;
-    private int tentativaQuatroBranco;
+    private JLabel numPinoPretoCinco;
+    private JLabel numPinoBrancoCinco;
 
-    private int tentativaCincoPreto;
-    private int tentativaCincoBranco;
+    private JLabel numPinoPretoSeis;
+    private JLabel numPinoBrancoSeis;
 
-    private int tentativaSeisPreto;
-    private int tentativaSeisBranco;
+    private JLabel numPinoPretoSete;
+    private JLabel numPinoBrancoSete;
 
-    private int tentativaSetePreto;
-    private int tentativaSeteBranco;
+    private JLabel numPinoPretoOito;
+    private JLabel numPinoBrancoOito;
 
-    private int tentativaOitoPreto;
-    private int tentativaOitoBranco;
 
     private PinoColorido[] senha;
 
     private CriadorSenha criaSenha;
 
+    private int numTentativas;
 
-    
-
-
-    public TelaEscolha(JFrame win, Pino[] pinosEscolhaSenha) {
+    public TelaEscolha(JFrame win, PinoColorido[] pinosEscolhaSenha) {
         this.win = win;
         this.tentativaUm = pinosEscolhaSenha;
         this.numPreto = 0;
         this.numBranco = 0;
         this.senha = new PinoColorido[4];
-        this.criaSenha = new CriadorSenha(pinosSenha);
+        this.criaSenha = new CriadorSenha(senha);
+        this.numTentativas = 0;
     }
 
     public void criaJanelaEscolhaSenha(){
@@ -90,8 +91,6 @@ public class TelaEscolha {
 
         win = new JFrame("Jogo da Senha");
         //win.setSize(300, 200);
-
-        
 
         JPanel topo = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel linha1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -117,18 +116,22 @@ public class TelaEscolha {
 
         // primeira tentativa
 
-        tentativaUm = new Pino[4];
+        tentativaUm = new PinoColorido[4];
         tentativaUm[0] = PinoColorido.criaPinoColorido("RED");
         tentativaUm[1] = PinoColorido.criaPinoColorido("RED");
         tentativaUm[2] = PinoColorido.criaPinoColorido("RED");
         tentativaUm[3] = PinoColorido.criaPinoColorido("RED");
-        
+        tentativaUm[0].setEnabled(true);
+        tentativaUm[1].setEnabled(true);
+        tentativaUm[2].setEnabled(true);
+        tentativaUm[3].setEnabled(true);
+
         for(Pino p:tentativaUm){
             linha1.add(p);
         }
 
-        JLabel numPinoPretoUm = new JLabel(String.valueOf(numPreto));
-        JLabel numPinoBrancoUm = new JLabel(String.valueOf(numBranco));
+        numPinoPretoUm = new JLabel(String.valueOf(numPreto));
+        numPinoBrancoUm = new JLabel(String.valueOf(numBranco));
 
         linha1.add(PinoPB.criaPinoPreto());
         linha1.add(numPinoPretoUm);
@@ -143,13 +146,18 @@ public class TelaEscolha {
         tentativaDois[1] = PinoColorido.criaPinoColorido("RED");
         tentativaDois[2] = PinoColorido.criaPinoColorido("RED");
         tentativaDois[3] = PinoColorido.criaPinoColorido("RED");
-        
+        tentativaDois[0].setEnabled(false);
+        tentativaDois[1].setEnabled(false);
+        tentativaDois[2].setEnabled(false);
+        tentativaDois[3].setEnabled(false);
+
+
         for(Pino p:tentativaDois){
             linha2.add(p);
         }
 
-        JLabel numPinoPretoDois = new JLabel(String.valueOf(numPreto));
-        JLabel numPinoBrancoDois = new JLabel(String.valueOf(numBranco));
+        numPinoPretoDois = new JLabel(String.valueOf(numPreto));
+        numPinoBrancoDois = new JLabel(String.valueOf(numBranco));
         
         linha2.add(PinoPB.criaPinoPreto());
         linha2.add(numPinoPretoDois);
@@ -163,13 +171,17 @@ public class TelaEscolha {
         tentativaTres[1] = PinoColorido.criaPinoColorido("RED");
         tentativaTres[2] = PinoColorido.criaPinoColorido("RED");
         tentativaTres[3] = PinoColorido.criaPinoColorido("RED");
+        tentativaTres[0].setEnabled(false);
+        tentativaTres[1].setEnabled(false);
+        tentativaTres[2].setEnabled(false);
+        tentativaTres[3].setEnabled(false);
         
         for(Pino p:tentativaTres){
             linha3.add(p);
         }
 
-        JLabel numPinoPretoTres = new JLabel(String.valueOf(numPreto));
-        JLabel numPinoBrancoTres = new JLabel(String.valueOf(numBranco));
+        numPinoPretoTres = new JLabel(String.valueOf(numPreto));
+        numPinoBrancoTres = new JLabel(String.valueOf(numBranco));
 
         linha3.add(PinoPB.criaPinoPreto());
         linha3.add(numPinoPretoTres);
@@ -183,13 +195,17 @@ public class TelaEscolha {
         tentativaQuatro[1] = PinoColorido.criaPinoColorido("RED");
         tentativaQuatro[2] = PinoColorido.criaPinoColorido("RED");
         tentativaQuatro[3] = PinoColorido.criaPinoColorido("RED");
+        tentativaQuatro[0].setEnabled(false);
+        tentativaQuatro[1].setEnabled(false);
+        tentativaQuatro[2].setEnabled(false);
+        tentativaQuatro[3].setEnabled(false);
         
         for(Pino p:tentativaQuatro){
             linha4.add(p);
         }
 
-        JLabel numPinoPretoQuatro = new JLabel(String.valueOf(numPreto));
-        JLabel numPinoBrancoQuatro = new JLabel(String.valueOf(numBranco));
+        numPinoPretoQuatro = new JLabel(String.valueOf(numPreto));
+        numPinoBrancoQuatro = new JLabel(String.valueOf(numBranco));
 
         linha4.add(PinoPB.criaPinoPreto());
         linha4.add(numPinoPretoQuatro);
@@ -203,13 +219,17 @@ public class TelaEscolha {
         tentativaCinco[1] = PinoColorido.criaPinoColorido("RED");
         tentativaCinco[2] = PinoColorido.criaPinoColorido("RED");
         tentativaCinco[3] = PinoColorido.criaPinoColorido("RED");
+        tentativaCinco[0].setEnabled(false);
+        tentativaCinco[1].setEnabled(false);
+        tentativaCinco[2].setEnabled(false);
+        tentativaCinco[3].setEnabled(false);
         
         for(Pino p:tentativaCinco){
             linha5.add(p);
         }
 
-        JLabel numPinoPretoCinco = new JLabel(String.valueOf(numPreto));
-        JLabel numPinoBrancoCinco = new JLabel(String.valueOf(numBranco));
+        numPinoPretoCinco = new JLabel(String.valueOf(numPreto));
+        numPinoBrancoCinco = new JLabel(String.valueOf(numBranco));
 
         linha5.add(PinoPB.criaPinoPreto());
         linha5.add(numPinoPretoCinco);
@@ -223,13 +243,17 @@ public class TelaEscolha {
         tentativaSeis[1] = PinoColorido.criaPinoColorido("RED");
         tentativaSeis[2] = PinoColorido.criaPinoColorido("RED");
         tentativaSeis[3] = PinoColorido.criaPinoColorido("RED");
-        
+        tentativaSeis[0].setEnabled(false);
+        tentativaSeis[1].setEnabled(false);
+        tentativaSeis[2].setEnabled(false);
+        tentativaSeis[3].setEnabled(false);
+
         for(Pino p:tentativaSeis){
             linha6.add(p);
         }
 
-        JLabel numPinoPretoSeis = new JLabel(String.valueOf(numPreto));
-        JLabel numPinoBrancoSeis = new JLabel(String.valueOf(numBranco));
+        numPinoPretoSeis = new JLabel(String.valueOf(numPreto));
+        numPinoBrancoSeis = new JLabel(String.valueOf(numBranco));
 
         linha6.add(PinoPB.criaPinoPreto());
         linha6.add(numPinoPretoSeis);
@@ -244,13 +268,17 @@ public class TelaEscolha {
         tentativaSete[1] = PinoColorido.criaPinoColorido("RED");
         tentativaSete[2] = PinoColorido.criaPinoColorido("RED");
         tentativaSete[3] = PinoColorido.criaPinoColorido("RED");
+        tentativaSete[0].setEnabled(false);
+        tentativaSete[1].setEnabled(false);
+        tentativaSete[2].setEnabled(false);
+        tentativaSete[3].setEnabled(false);
 
         for(Pino p:tentativaSete){
             linha7.add(p);
         }
 
-        JLabel numPinoPretoSete = new JLabel(String.valueOf(numPreto));
-        JLabel numPinoBrancoSete = new JLabel(String.valueOf(numBranco));
+        numPinoPretoSete = new JLabel(String.valueOf(numPreto));
+        numPinoBrancoSete = new JLabel(String.valueOf(numBranco));
 
         linha7.add(PinoPB.criaPinoPreto());
         linha7.add(numPinoPretoSete);
@@ -264,13 +292,17 @@ public class TelaEscolha {
         tentativaOito[1] = PinoColorido.criaPinoColorido("RED");
         tentativaOito[2] = PinoColorido.criaPinoColorido("RED");
         tentativaOito[3] = PinoColorido.criaPinoColorido("RED");
+        tentativaOito[0].setEnabled(false);
+        tentativaOito[1].setEnabled(false);
+        tentativaOito[2].setEnabled(false);
+        tentativaOito[3].setEnabled(false);
 
         for(Pino p:tentativaOito){
             linha8.add(p);
         }
 
-        JLabel numPinoPretoOito = new JLabel(String.valueOf(numPreto));
-        JLabel numPinoBrancoOito = new JLabel(String.valueOf(numBranco));
+        numPinoPretoOito = new JLabel(String.valueOf(numPreto));
+        numPinoBrancoOito = new JLabel(String.valueOf(numBranco));
 
         linha8.add(PinoPB.criaPinoPreto());
         linha8.add(numPinoPretoOito);
@@ -288,6 +320,11 @@ public class TelaEscolha {
         for(Pino p:senha){
             linha9.add(p);
         }
+
+        senha[0].setEnabled(false);
+        senha[1].setEnabled(false);
+        senha[2].setEnabled(false);
+        senha[3].setEnabled(false);
 
 
         JButton botaoEnviarSenha = new JButton("ENVIAR");
@@ -308,9 +345,13 @@ public class TelaEscolha {
         painelDeConteudo.add(linha9);
         painelDeConteudo.add(linha10);
 
+        for (int i = 0; i < senha.length; i ++) {
+            System.out.println(senha[i].getCor());
+        }
+
         
 
-        botaoEnviarSenha.addActionListener(ev->trataEventoBotaoNovoJogo(ev));
+        botaoEnviarSenha.addActionListener(ev->trataEventoBotaoEnviar(ev));
         
         win.pack();
         win.setLocationRelativeTo(null);
@@ -318,11 +359,108 @@ public class TelaEscolha {
         win.setVisible(true);
     } 
 
-    public void trataEventoBotaoNovoJogo(ActionEvent ev){
+    public void trataEventoBotaoEnviar(ActionEvent ev) {
+        
+        PinoColorido [] senhaTeste = new PinoColorido[4];
+        
 
-        //TelaJogo app = new TelaJogo();    
-        //app.criaJanelaPrincipal();
-           
+        numTentativas++;
+        switch (numTentativas) {
+            case 1:
+                tentativaUm[0].setEnabled(false);
+                tentativaUm[1].setEnabled(false);
+                tentativaUm[2].setEnabled(false);
+                tentativaUm[3].setEnabled(false);
+
+                //for (int i = 0; i < senha.length; i ++) {
+                //    System.out.println(senha[i].getCor());
+                //}
+
+                for (int i = 0; i < tentativaUm.length; i ++) {
+                    System.out.println(tentativaUm[i].getCor());
+                }
+
+                comparaPinos(tentativaUm, senha);
+                numPinoPretoUm.setText("" + numPreto);
+                numPinoBrancoUm.setText("" + numBranco);
+
+                tentativaDois[0].setEnabled(true);
+                tentativaDois[1].setEnabled(true);
+                tentativaDois[2].setEnabled(true);
+                tentativaDois[3].setEnabled(true);
+                break;
+            case 2:
+                tentativaDois[0].setEnabled(false);
+                tentativaDois[1].setEnabled(false);
+                tentativaDois[2].setEnabled(false);
+                tentativaDois[3].setEnabled(false);
+
+                tentativaTres[0].setEnabled(true);
+                tentativaTres[1].setEnabled(true);
+                tentativaTres[2].setEnabled(true);
+                tentativaTres[3].setEnabled(true);
+                break;
+            case 4:
+                tentativaTres[0].setEnabled(false);
+                tentativaTres[1].setEnabled(false);
+                tentativaTres[2].setEnabled(false);
+                tentativaTres[3].setEnabled(false);
+
+                tentativaQuatro[0].setEnabled(true);
+                tentativaQuatro[1].setEnabled(true);
+                tentativaQuatro[2].setEnabled(true);
+                tentativaQuatro[3].setEnabled(true);
+                break;
+            case 5:
+                tentativaQuatro[0].setEnabled(false);
+                tentativaQuatro[1].setEnabled(false);
+                tentativaQuatro[2].setEnabled(false);
+                tentativaQuatro[3].setEnabled(false);
+
+                tentativaCinco[0].setEnabled(true);
+                tentativaCinco[1].setEnabled(true);
+                tentativaCinco[2].setEnabled(true);
+                tentativaCinco[3].setEnabled(true);
+                break;
+            case 6:
+                tentativaCinco[0].setEnabled(false);
+                tentativaCinco[1].setEnabled(false);
+                tentativaCinco[2].setEnabled(false);
+                tentativaCinco[3].setEnabled(false);
+
+                tentativaSeis[0].setEnabled(true);
+                tentativaSeis[1].setEnabled(true);
+                tentativaSeis[2].setEnabled(true);
+                tentativaSeis[3].setEnabled(true);
+                break;
+            case 7:
+                tentativaSeis[0].setEnabled(false);
+                tentativaSeis[1].setEnabled(false);
+                tentativaSeis[2].setEnabled(false);
+                tentativaSeis[3].setEnabled(false);
+
+                tentativaSete[0].setEnabled(true);
+                tentativaSete[1].setEnabled(true);
+                tentativaSete[2].setEnabled(true);
+                tentativaSete[3].setEnabled(true);
+                break;
+            case 8:
+                tentativaSete[0].setEnabled(false);
+                tentativaSete[1].setEnabled(false);
+                tentativaSete[2].setEnabled(false);
+                tentativaSete[3].setEnabled(false);
+
+                tentativaOito[0].setEnabled(true);
+                tentativaOito[1].setEnabled(true);
+                tentativaOito[2].setEnabled(true);
+                tentativaOito[3].setEnabled(true);
+                break;
+            case 9:
+                // perdeu
+                break;
+        }
+
+        
     }
 
     public void habilita(){
@@ -336,51 +474,57 @@ public class TelaEscolha {
             p.setEnabled(false);
         }
     }
-
-    public PinoColorido [] criaSenha() {
-
-        PinoColorido[] senha = new PinoColorido[4];
-
-        Random rand = new Random();
-
-        for (int i = 0; i < 4; i++) {
-            
-            int n = rand.nextInt(4);
-          
-            switch (n) {
-
-                case 0:
-                    pinosSenha[i] = PinoColorido.criaPinoColorido("BLUE");
-                case 1:
-                    pinosSenha[i] = PinoColorido.criaPinoColorido("RED");
-                case 2:
-                    pinosSenha[i] = PinoColorido.criaPinoColorido("GREEN");   
-                case 3:
-                    pinosSenha[i] = PinoColorido.criaPinoColorido("YELLOW");
-            }
-            pinosSenha[i].setEnabled(false);
-        }
-        return senha;
-    }
-
-    public void comparaPinos (PinoColorido[] primeiro, PinoColorido[] segundo) {
+    
+    /*
+    public void comparaPinos (Pino[] primeiro, PinoColorido[] segundo) {
 
         numBranco = 0;
         numPreto = 0;
 
-        for (int i = 0; i < primeiro.length; i++) {
-            if (primeiro[i].equals(segundo[i])) {
+        for (int i = 0; i < primeiro.length - 1; i++) {
+            if (primeiro[i] == (segundo[i])) {
                 numPreto++;
+
             }
             else {
-                for (int j = 0; i < primeiro.length; j++) {
-                    
+                for (int j = 0; j < primeiro.length - 1; j++) {
+                    if (primeiro[j].equals(segundo[j]));
+                    numBranco++;
                 }
             }
-
         }
-
-
     }
-}
+         */
 
+    public void comparaPinos(PinoColorido[] primeiro, PinoColorido[] segundo) {
+
+        numBranco = 0;
+        numPreto = 0;
+            boolean[] marcadosPrimeiro = new boolean[primeiro.length];
+            boolean[] marcadosSegundo = new boolean[segundo.length];
+        
+            // Contar pinos pretos (corretos na posição correta)
+            for (int i = 0; i < primeiro.length; i++) {
+                if (primeiro[i].getCor().equals(segundo[i].getCor())) {
+                    numPreto++;
+                    marcadosPrimeiro[i] = true;
+                    marcadosSegundo[i] = true;
+                    System.out.println("teste");
+                }
+            }
+        
+            // Contar pinos brancos (corretos na posição errada)
+            for (int i = 0; i < primeiro.length; i++) {
+                if (!marcadosPrimeiro[i]) {
+                    for (int j = 0; j < segundo.length; j++) {
+                        if (!marcadosSegundo[j] && primeiro[i].equals(segundo[j])) {
+                            numBranco++;
+                            marcadosSegundo[j] = true;
+                            break;
+                        }
+                    }
+                }
+            }
+         
+        }
+}
